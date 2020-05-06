@@ -47,11 +47,12 @@ public class Cuenta {
       throw new MaximoExtraccionDiarioException("No puede extraer mas de $ " + 1000
           + " diarios, límite: " + limite);
     }
-    new Movimiento(LocalDate.now(), cuanto, false).agregateA(this);
+    agregarMovimiento(LocalDate.now(),cuanto,false);
   }
 
   public void agregarMovimiento(LocalDate fecha, double cuanto, boolean esDeposito) {
-    movimientos.add(new Movimiento(fecha, cuanto, esDeposito));
+	  this.saldo = calcularValor(esDeposito,cuanto);
+	  movimientos.add(new Movimiento(fecha, cuanto, esDeposito));
   }
 
   public double getMontoExtraidoA(LocalDate fecha) {
@@ -72,5 +73,13 @@ public class Cuenta {
   public void setSaldo(double saldo) {
     this.saldo = saldo;
   }
+
+	  public double calcularValor(boolean esDeposito,double monto) {
+	    if (esDeposito) {
+	      return saldo + monto;
+	    } else {
+	      return saldo - monto;
+	    }
+	  }
 
 }
