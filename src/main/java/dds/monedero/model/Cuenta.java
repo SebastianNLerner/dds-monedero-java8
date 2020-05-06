@@ -1,5 +1,4 @@
 package dds.monedero.model;
-import java.util.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -15,8 +14,7 @@ public class Cuenta {
   private double saldo = 0;
   private List<Movimiento> movimientos = new ArrayList<>();
 
-  public Cuenta(double montoInicial) {
-	  saldo = montoInicial;
+  public Cuenta() {
   }
 
   public void setMovimientos(List<Movimiento> movimientos) {
