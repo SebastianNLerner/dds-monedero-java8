@@ -37,8 +37,8 @@ public class Cuenta {
     if (cuanto <= 0) {
       throw new MontoNegativoException(cuanto + ": el monto a ingresar debe ser un valor positivo");
     }
-    if (getSaldo() < cuanto) {
-      throw new SaldoMenorException("No puede sacar mas de " + getSaldo() + " $");
+    if (saldo < cuanto) {
+      throw new SaldoMenorException("No puede sacar mas de " + saldo + " $");
     }
     double limite = 1000 - getMontoExtraidoA(LocalDate.now());
     if (cuanto > limite) {
@@ -62,10 +62,6 @@ public class Cuenta {
 
   public List<Movimiento> getMovimientos() {
     return movimientos;
-  }
-
-  public double getSaldo() {
-    return saldo;
   }
 
   public void setSaldo(double saldo) {
