@@ -30,7 +30,7 @@ public class Cuenta {
       throw new MaximaCantidadDepositosException("Ya excedio los " + 3 + " depositos diarios");
     }
 
-    new Movimiento(LocalDate.now(), cuanto, true).agregateA(this);
+    agregarMovimiento(LocalDate.now(),cuanto,true);
   }
 
   public void sacar(double cuanto) {
@@ -66,6 +66,10 @@ public class Cuenta {
 
   public void setSaldo(double saldo) {
     this.saldo = saldo;
+  }
+  
+  public double getSaldo() {
+	  return saldo;
   }
 
 	  public double calcularValor(boolean esDeposito,double monto) {
