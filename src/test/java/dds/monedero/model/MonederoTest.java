@@ -1,5 +1,7 @@
 package dds.monedero.model;
 
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -17,8 +19,9 @@ public class MonederoTest {
   }
 
   @Test
-  public void Poner() {
+  public void Poner_1500_en_la_cuenta() {
     cuenta.poner(1500);
+    assertEquals(1500, cuenta.getSaldo(),0.0);
   }
 
   @Test(expected = MontoNegativoException.class)
@@ -27,14 +30,15 @@ public class MonederoTest {
   }
 
   @Test
-  public void TresDepositos() {
+  public void Poner_Tres_Depositos_Seguidos() {
     cuenta.poner(1500);
     cuenta.poner(456);
     cuenta.poner(1900);
+    assertEquals(1500+1900+456, cuenta.getSaldo(),0.0);
   }
 
   @Test(expected = MaximaCantidadDepositosException.class)
-  public void MasDeTresDepositos() {
+  public void No_Se_Puede_Poner_Mas_De_Tres_Depositos() {
     cuenta.poner(1500);
     cuenta.poner(456);
     cuenta.poner(1900);
@@ -42,19 +46,19 @@ public class MonederoTest {
   }
 
   @Test(expected = SaldoMenorException.class)
-  public void ExtraerMasQueElSaldo() {
+  public void No_Se_Puede_Extraer_Mas_Que_El_Saldo() {
     cuenta.setSaldo(90);
     cuenta.sacar(1001);
   }
 
   @Test(expected = MaximoExtraccionDiarioException.class)
-  public void ExtraerMasDe1000() {
+  public void No_Se_Puede_Extraer_Mas_De_1000() {
     cuenta.setSaldo(5000);
     cuenta.sacar(1001);
   }
 
   @Test(expected = MontoNegativoException.class)
-  public void ExtraerMontoNegativo() {
+  public void No_Se_Puede_Extraer_Monto_Negativo() {
     cuenta.sacar(-500);
   }
 
